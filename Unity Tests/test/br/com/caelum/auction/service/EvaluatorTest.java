@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import br.com.caelum.auction.domain.Auction;
@@ -22,14 +23,26 @@ public class EvaluatorTest {
 	 * - Find the top three bids
 	 * 
 	 */
+	
+	private Evaluator auctioneer;
+	private User joao;
+	private User jose;
+	private User maria;
+	
+	
+	/* Build the test scene */
+	@Before
+	public void createEvaluator() {
+		this.auctioneer = new Evaluator();
+		
+		this.joao = new User("João");
+		this.jose = new User("José");
+		this.maria = new User("Maria");
+	}
 
 	@Test
 	public void bidsWithIncreasingValues() {
-		// Build the test scene
-		User joao = new User("João");
-		User jose = new User("José");
-		User maria = new User("Maria");
-
+		
 		Auction auction = new Auction("Playstation 5 - New");
 
 		// Execute an action (method)
@@ -37,7 +50,6 @@ public class EvaluatorTest {
 		auction.proposes(new Bid(jose, 300.0));
 		auction.proposes(new Bid(maria, 400.0));
 
-		Evaluator auctioneer = new Evaluator();
 		auctioneer.evaluate(auction);
 
 		// Validate the result
@@ -52,10 +64,6 @@ public class EvaluatorTest {
 
 	@Test
 	public void bidsWithNonIncreasingValues() {
-		// Build the test scene
-		User joao = new User("João");
-		User jose = new User("José");
-		User maria = new User("Maria");
 
 		Auction auction = new Auction("Playstation 5 - New");
 
@@ -64,7 +72,6 @@ public class EvaluatorTest {
 		auction.proposes(new Bid(jose, 300.0));
 		auction.proposes(new Bid(maria, 250.0));
 
-		Evaluator auctioneer = new Evaluator();
 		auctioneer.evaluate(auction);
 
 		// Validate the result
@@ -79,10 +86,6 @@ public class EvaluatorTest {
 	
 	@Test
 	public void bidsWithUnclassifiedValues() {
-		// Build the test scene
-		User joao = new User("João");
-		User jose = new User("José");
-		User maria = new User("Maria");
 
 		Auction auction = new Auction("Playstation 5 - New");
 
@@ -91,7 +94,6 @@ public class EvaluatorTest {
 		auction.proposes(new Bid(jose, 250.0));
 		auction.proposes(new Bid(maria, 400.0));
 
-		Evaluator auctioneer = new Evaluator();
 		auctioneer.evaluate(auction);
 
 		// Validate the result
@@ -106,15 +108,12 @@ public class EvaluatorTest {
 	
 	@Test
 	public void bidsWithOnlyOneValue() {
-		// Build the test scene
-		User joao = new User("João");
 
 		Auction auction = new Auction("Playstation 5 - New");
 
 		// Execute an action (method)
 		auction.proposes(new Bid(joao, 300.0));
 
-		Evaluator auctioneer = new Evaluator();
 		auctioneer.evaluate(auction);
 
 		// Validate the result
@@ -129,9 +128,6 @@ public class EvaluatorTest {
 	
 	@Test
 	public void findTopThreeBids() {
-		// Build the test scene
-		User joao = new User("João");
-		User maria = new User("Maria");
 
 		Auction auction = new Auction("Playstation 5 - New");
 
@@ -141,7 +137,6 @@ public class EvaluatorTest {
 		auction.proposes(new Bid(joao, 300.0));
 		auction.proposes(new Bid(maria, 400.0));
 
-		Evaluator auctioneer = new Evaluator();
 		auctioneer.evaluate(auction);
 
 		// Validate the result
