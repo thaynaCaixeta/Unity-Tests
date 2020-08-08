@@ -1,2 +1,2 @@
-# Unity-Tests-With-jUnity
- This is a simple project focused on unit tests using junity
+# Unit-Tests-With-jUnit
+ This is a simple project focused on unit tests using jUnity and TDD approach
